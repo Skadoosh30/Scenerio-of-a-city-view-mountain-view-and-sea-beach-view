@@ -16,10 +16,6 @@ using namespace std;
  static float	bm =  350.0;
 
 
- /*float spin = 0.0;
- GLfloat	tx	=  5;
- GLfloat	ty	=  5;*/
-
 float sunY = 260.0f; // Initial Y-coordinate of the sun
 bool isDay = true; // Tracks whether it's day or night
 float backgroundR = 0.3f, backgroundG = 0.65f, backgroundB = 1.0f; // Daytime sky color
@@ -27,21 +23,7 @@ float backgroundR = 0.3f, backgroundG = 0.65f, backgroundB = 1.0f; // Daytime sk
 bool isSunsetActive = false;
 bool isSunriseActive = false;
 
-/*void circle(GLfloat rx,GLfloat ry,GLfloat x,GLfloat y)
-{
-    int i;
-    float rad = 0;
-    glBegin(GL_POLYGON);
-    glVertex2f(x,y);
-    for(i = 0;i<=360; i++){
-    rad = i*(3.1416f/180.0f);
-    glVertex2f(x+rx*cos(rad),y+ry*sin(rad));
 
-    }
-    glEnd();
-
-
-}*/
 // Function to draw a circle (or ellipse)
 void circle(GLfloat rx, GLfloat ry, GLfloat x, GLfloat y) {
     glBegin(GL_POLYGON);
@@ -167,16 +149,12 @@ void rectangle1(int x1,int y1, int x2, int y2, int x3, int y3, int x4, int y4)
 }
 
 
-
-
-
 void ground()
 {
      glColor3f(0.0, 0.3, 0.0);
      rectangle(-300,-300,300,-10);
 
 }
-
 
 void road() {
     glColor3f(0.3, 0.3, 0.3);
@@ -473,10 +451,6 @@ void drawPineTree(float x, float y) {
     glPopMatrix();
 }
 
-
-
-
-
 void drawObjects() {
 
     drawPineTree(170, -190);// Adjust X and Y to place tree between benches
@@ -487,7 +461,6 @@ void drawObjects() {
     drawPineTree(80,20);
 
 }
-
 
 // Function to draw a lamp post
 
@@ -527,31 +500,7 @@ void timer(int) {
     glutPostRedisplay();                   // Redraw the scene
     glutTimerFunc(4, timer, 0);           // Set up next timer callback (~60 FPS)
 }
-/*void myDisplay()
-{
-     glClearColor(backgroundR, backgroundG, backgroundB, 1.0f);  // Update background color
-    glClear(GL_COLOR_BUFFER_BIT);
-    sun();
-    cloud();
 
-    ground();
-    road();
-
-    tree2();
-    buildings();
-    house();
-
-
-   drawTrafficLight();
-    bus();
-    car();
-
-    allVehiclesMove();
-
-   drawBenches();
-   drawObjects();
-    glFlush();
-}*/
 void init()
 {   glMatrixMode(GL_PROJECTION);
 
@@ -561,44 +510,8 @@ void init()
 }
 
 
-/*void my_keyboard(unsigned char key, int x, int y) {
-    switch (key) {
-        case 'g':
-            lightState = 1;
-            //glutIdleFunc(allVehiclesMove); // Set a single idle function for all vehicles
-             glutPostRedisplay();
-            break;
-        case 'r':
-            lightState = 0;
-           // glutIdleFunc(NULL);
-            glutPostRedisplay();
-            break;
 
-        default:
-            break;
-    }
-}*/
-
-
-/*int main(int argc, char *argv[])
-{
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(1500, 700);
-    glutInitWindowPosition(0, 0);
-    glutCreateWindow("Computer Graphics Project");
-    init();
-    glutDisplayFunc(myDisplay);
-   // glutTimerFunc(3000, changeTrafficLight, 0);
-    glutMouseFunc(mouse);
-    glutTimerFunc(0, timer, 0);
-   // glutSpecialFunc(spe_key);
-    glutKeyboardFunc(my_keyboard);
-    glutMainLoop();
-    return 0;
-}*/
-
-//***************************************************************************************** //end 3rd scenerio code  ************************
+//***************************************************************************************** //end city view scenerio code  ************************
 
 
 
@@ -980,61 +893,6 @@ void drawCar() {
     circlemoun(-0.69, -0.81, 0.015, 20);
 }
 
-
-/*void display() {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glLoadIdentity();
-
-    glClearColor(0.8f, 0.9f, 1.0f, 1.0f); // Light blue background
-
-    drawBlueMountain();
-    drawGreenMountain(-1.0f);
-    drawGreenMountain(0.5f);
-
-    GroundMoun();
-    RoadMoun();
-    drawTollPlaza();
-    drawLampPost1(); // Draw the lamp post after the toll plaza
-    drawLampPost2(); // Draw the lamp post after the toll plaza
-    drawLampPost3(); // Draw the lamp post after the toll plaza
-    drawLampPost4(); // Draw the lamp post after the toll plaza
-    drawSun();
-
-    //glPushMatrix();
-    //glColor3f(1.0, 0.0, 0.0); // Car color (Red)
-   // glTranslatef(carX, roadY, 0.0); // Adjust `roadY` to match the road level
-    drawCar();
-    glPopMatrix();
-
-
-
-
-    drawCar();
-
-    // Draw clouds
-    circlemoun(cloudmoun1, 0.8f, 0.1f, 50, 1.0f, 1.0f, 1.0f);
-    circlemoun(cloudmoun1 + 0.04f, 0.87f, 0.08f, 50, 1.0f, 1.0f, 1.0f);
-    circlemoun(cloudmoun1 + 0.1f, 0.8f, 0.09f, 50, 1.0f, 1.0f, 1.0f);
-
-    circlemoun(cloudmoun2, 0.8f, 0.1f, 50, 1.0f, 1.0f, 1.0f);
-    circlemoun(cloudmoun2 + 0.05f, 0.87f, 0.08f, 50, 1.0f, 1.0f, 1.0f);
-    circlemoun(cloudmoun2 + 0.1f, 0.8f, 0.09f, 50, 1.0f, 1.0f, 1.0f);
-
-    glutSwapBuffers();
-    glFlush();
-}*/
-// Idle function to update cloud positions
-/*void updatemoun(int value) {
-    cloudmoun1 += 0.004f;
-    cloudmoun2 += 0.004f;
-
-    if (cloudmoun1 > 1.8f) cloudmoun1 = -1.5f;
-    if (cloudmoun2 > 1.5f) cloudmoun2 = -1.5f;
-
-    glutPostRedisplay();
-    glutTimerFunc(16, updatemoun, 0);
-}*/
-
 void initOpenGL() {
     glClearColor(0.53f, 0.81f, 0.92f, 1.0f); // Sky blue
     glMatrixMode(GL_PROJECTION);
@@ -1042,20 +900,8 @@ void initOpenGL() {
     gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
 }
 
-/*int main(int argc, char** argv) {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(800, 600);
-    glutCreateWindow("Mountain Landscape with Toll Plaza and Lamp Post");
-    initOpenGL();
-    glutDisplayFunc(display);
-    glutIdleFunc(display);
-    glutTimerFunc(0, update, 0);
-    glutMainLoop();
-    return 0;
-}*/
 
-//******************************************************************************** end scenerio 1st ********************
+//******************************************************************************** end mountain scenerio  ********************
 
 // Global variable to track cloud positions
 float cloud1X = -0.82f;
@@ -1445,170 +1291,6 @@ void sea_beach_umbrella3() {
 }
 
 // Display function
-/*void display() {
-
-
-    if(timeChange>0){
-        glClearColor(backgroundR, backgroundG, backgroundB, 1.0f);  // Update background color
-    glClear(GL_COLOR_BUFFER_BIT);
-    sun();
-    cloud();
-
-    ground();
-    road();
-
-    tree2();
-    buildings();
-    house();
-
-
-   drawTrafficLight();
-    bus();
-    car();
-
-    allVehiclesMove();
-
-   drawBenches();
-   drawObjects();
-    }
-
-   //city display end........***********************************************
-
-    else if(timeChange>60){
-
-         glClear(GL_COLOR_BUFFER_BIT);
-    glLoadIdentity();
-
-    glClearColor(0.8f, 0.9f, 1.0f, 1.0f); // Light blue background
-
-    drawBlueMountain();
-    drawGreenMountain(-1.0f);
-    drawGreenMountain(0.5f);
-
-    GroundMoun();
-    RoadMoun();
-    drawTollPlaza();
-    drawLampPost1(); // Draw the lamp post after the toll plaza
-    drawLampPost2(); // Draw the lamp post after the toll plaza
-    drawLampPost3(); // Draw the lamp post after the toll plaza
-    drawLampPost4(); // Draw the lamp post after the toll plaza
-    drawSun();
-
-    //glPushMatrix();
-    //glColor3f(1.0, 0.0, 0.0); // Car color (Red)
-   // glTranslatef(carX, roadY, 0.0); // Adjust `roadY` to match the road level
-    drawCar();
-    glPopMatrix();
-
-
-
-
-    drawCar();
-
-    // Draw clouds
-    circlemoun(cloudmoun1, 0.8f, 0.1f, 50, 1.0f, 1.0f, 1.0f);
-    circlemoun(cloudmoun1 + 0.04f, 0.87f, 0.08f, 50, 1.0f, 1.0f, 1.0f);
-    circlemoun(cloudmoun1 + 0.1f, 0.8f, 0.09f, 50, 1.0f, 1.0f, 1.0f);
-
-    circlemoun(cloudmoun2, 0.8f, 0.1f, 50, 1.0f, 1.0f, 1.0f);
-    circlemoun(cloudmoun2 + 0.05f, 0.87f, 0.08f, 50, 1.0f, 1.0f, 1.0f);
-    circlemoun(cloudmoun2 + 0.1f, 0.8f, 0.09f, 50, 1.0f, 1.0f, 1.0f);
-
-    glutSwapBuffers();
-
-    }
-//*************************************************************mountain end*************************************
-
-    // sea start from here ***************************************************************
-
-   else if(timeChange>120){
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    // Draw the sky
-    float skyR, skyG, skyB;
-    if (currentMode == DAY) {
-        interpolateColor(transitionFactor, 0.5f, 0.8f, 1.0f, 0.2f, 0.2f, 0.5f, skyR, skyG, skyB);
-    } else if (currentMode == EVENING) {
-        interpolateColor(transitionFactor, 0.2f, 0.2f, 0.5f, 0.0f, 0.0f, 0.1f, skyR, skyG, skyB);
-    } else {
-        skyR = 0.0f; skyG = 0.0f; skyB = 0.1f;
-    }
-    Rectanglesea(-1.0f, 0.0f, 2.0f, 1.0f, skyR, skyG, skyB);
-
-    // Draw the sun/moon
-    if (currentMode == DAY || currentMode == EVENING) {
-        float sunR, sunG, sunB;
-        interpolateColor(transitionFactor, 1.0f, 1.0f, 0.0f, 1.0f, 0.5f, 0.0f, sunR, sunG, sunB);
-        Circlesea(0.7f, 0.7f, 0.1f, 50, sunR, sunG, sunB);
-    } else {
-        Circlesea(0.7f, 0.7f, 0.1f, 50, 0.9f, 0.9f, 0.9f);
-    }
-
-    // Draw fixed stars at night
-    if (currentMode == NIGHT) {
-        glColor3f(1.0f, 1.0f, 1.0f);
-        for (int i = 0; i < 20; i++) {
-            Circlesea(stars[i].x, stars[i].y, 0.005f, 10, 1.0f, 1.0f, 1.0f);
-        }
-    }
-
-    // Draw clouds
-    Circlesea(cloud1X, 0.8f, 0.1f, 50, 1.0f, 1.0f, 1.0f);
-    Circlesea(cloud1X + 0.04f, 0.87f, 0.08f, 50, 1.0f, 1.0f, 1.0f);
-    Circlesea(cloud1X + 0.1f, 0.8f, 0.09f, 50, 1.0f, 1.0f, 1.0f);
-
-    Circlesea(cloud2X, 0.8f, 0.1f, 50, 1.0f, 1.0f, 1.0f);
-    Circlesea(cloud2X + 0.05f, 0.87f, 0.08f, 50, 1.0f, 1.0f, 1.0f);
-    Circlesea(cloud2X + 0.1f, 0.8f, 0.09f, 50, 1.0f, 1.0f, 1.0f);
-
-    // Draw the sea
-    float seaR, seaG, seaB;
-    if (currentMode == DAY) {
-        interpolateColor(transitionFactor, 0.0f, 0.5f, 0.8f, 0.0f, 0.2f, 0.4f, seaR, seaG, seaB);
-    } else if (currentMode == EVENING) {
-        interpolateColor(transitionFactor, 0.0f, 0.2f, 0.4f, 0.0f, 0.1f, 0.2f, seaR, seaG, seaB);
-    } else {
-        seaR = 0.0f; seaG = 0.1f; seaB = 0.2f;
-    }
-    Rectanglesea(-1.0f, -0.5f, 2.0f, 0.5f, seaR, seaG, seaB);
-
-    // Draw the beach
-    Rectanglesea(-1.0f, -1.0f, 2.0f, 0.5f, 0.9f, 0.7f, 0.4f);
-
-    // Draw boats and ships
-    drawBoat(boat1X, -0.3f, 1.0f);
-    drawBoat(boat2X, -0.1f, 0.7f);
-    drawShip(shipX, -0.2f, 0.7f);
-
-    // Draw watching tower and coconut trees
-    drawWatchingTower(0.8f, -0.8f, 0.8f);
-    drawCoconutTree(-0.95f, -0.85f, 1.0f);
-    drawCoconutTree(-0.88f, -0.88f, 1.0f);
-    drawCoconutTree(-0.82f, -0.86f, 1.0f);
-
-    // Draw beach chairs and umbrellas
-    sea_beach_chair1();
-    sea_beach_chair2();
-    sea_beach_chair3();
-    sea_beach_umbrella1();
-    sea_beach_umbrella2();
-    sea_beach_umbrella3();
-    }
-     if (timeChange>180)
-     {
-         timeChange=0;
-     }
-
-    timeChange++;
-
-    cout<<timeChange<<endl;
-
-    glFlush();
-
-}*/
-
-int scenarioIndex = 0; // 0: City, 1: Mountain, 2: Sea
-
 
 void display() {
     //glClear(GL_COLOR_BUFFER_BIT);
@@ -1695,12 +1377,7 @@ void display() {
 
     glutSwapBuffers();
 
-
-
     }
-
-
-
 
     else if (scenarioIndex == 2) {
         // Sea Scene
@@ -1783,14 +1460,7 @@ void display() {
 
     glFlush();
 }
-/*void Testkeyboard(unsigned char key, int x, int y) {
-    if (key == 'n' || key == 'N') {
-        scenarioIndex = (scenarioIndex + 1) % 3; // Cycle through scenarios
-    } else if (key == 'p' || key == 'P') {
-        scenarioIndex = (scenarioIndex - 1 + 3) % 3; // Cycle backward
-    }
-    glutPostRedisplay(); // Refresh display
-}*/
+
 // Idle function to update cloud positions
 void update(int value) {
     cloud1X += 0.003f;
@@ -1826,13 +1496,8 @@ void update(int value) {
     if (carPosition2 < -1.0f) {
         carPosition2 = 1.0f;
     }
-
-
-
-
     if (cloudmoun1 > 1.8f) cloudmoun1 = -1.5f;
     if (cloudmoun2 > 1.5f) cloudmoun2 = -1.5f;
-
 
     if (cloud1X > 1.8f) cloud1X = -1.5f;
     if (cloud2X > 1.5f) cloud2X = -1.5f;
